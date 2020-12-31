@@ -1,7 +1,14 @@
 import PyPDF2 
-import glob 
 
-ogPdf = glob.glob('')
+
+file = open('test.pdf', 'rb')
+
+reader = PyPDF2.PdfFileReader(file)
+
+n = reader.numPages
+
+for i in range (n):
+    print(i)
 
 
 
