@@ -6,6 +6,10 @@
   </head>
   <body>
     <h1> Remove white pages in your Pdf. </h1>
-    <button>Submit PDF</button>
+    <label>Submit PDF</label>
+    <form id="uploadbanner" enctype="multipart/form-data" method="POST" action="/api/v1.0/tasks/render/">
+    <input id="fileupload" name="file" type="file" />
+    <input type="submit" value="submit" id="Submit" />
+   </form>
   </body>
 </html>
