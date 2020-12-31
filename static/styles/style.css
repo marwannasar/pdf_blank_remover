@@ -1,0 +1,11 @@
+.title-container, .body-container{
+    text-align: center;
+    margin-top: 50px;
+}
+.body-container, .submit-container{
+    padding-top: 100px;
+}
+
+#submit{
+    font-size: 30px;
+}
