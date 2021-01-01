@@ -16,14 +16,12 @@
           <form id="uploadbanner" enctype="multipart/form-data" method="POST" action="/api/v1.0/tasks/render/">
             <input id="fileupload" name="file" type="file" />
             <input type="submit" value="Submit" id="Submit" />
+            <div class="options-container">
+              <label for="customRange1">Blank Page Threshold</label>
+              <input value="90" type="range" min="0" max="100" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value;">
+              <em id="rangeValLabel"></em>
+            </div>
           </form>
-      </div>
-      <div class="options-container">
-        <form method="POST">
-          <label for="customRange1">Blank Page Threshold</label>
-          <input value="90" type="range" min="0" max="100" class="custom-range" id="customRange1" oninput="document.getElementById('rangeValLabel').innerHTML = this.value;">
-          <em id="rangeValLabel"></em>
-        </form>
       </div>
     </div>
   </body>

@@ -74,6 +74,7 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
 
     
 #process('test.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
+process('Document2-2020-12-3122-29-06.314310-input.pdf', "uploads\\", "downloads\\", "images\\", 0.1)
     
     
 
