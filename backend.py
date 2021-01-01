@@ -1,14 +1,85 @@
-import PyPDF2 
+from PyPDF2 import PdfFileReader, PdfFileWriter 
+import fitz
+from PIL import Image
+import os
 
 
-file = open('test.pdf', 'rb')
+def process(fileName, uploadPath, imagePath, threshold):
 
-reader = PyPDF2.PdfFileReader(file)
+    dirname = os.path.dirname(__file__)
+ 
+    file = open(os.path.join(dirname, uploadPath + fileName), 'rb')
 
-n = reader.numPages
+    reader = PyPDF2.PdfFileReader(file)
 
-for i in range (n):
-    print(i)
+    n = reader.numPages
+
+
+    doc = fitz.open(uploadPath + fileName)
+
+    pagesToKeep = list(range(n))
+     
+    for i in range (n):
+        deletePage = True
+       
+        
+        
+        page = doc.loadPage(i)
+        pix = page.getPixmap()
+        output = imagePath + "img%d.png" % (i) 
+        pix.writePNG(output)
+
+
+        img = Image.open(imagePath + "img%d.png" % (i)) 
+        size = img.size
+
+
+        width, height = size
+        totalPixels = width * height
+
+        sr,sg,sb = img.getpixel((1,1))
+
+
+        maxPixels = threshold * totalPixels
+
+        pixelCounter = 0
+        
+        for x in range (width):
+            for y in range (height):
+                r,g,b = img.getpixel((x,y))
+                if (r!=sr or g!=sg or b!=sb):
+                    pixelCounter +=1
+                    if pixelCounter > maxPixels:
+                        deletePage = False
+                    
+               
+
+        if deletePage:
+            pagesToKeep.remove(i)
+
+
+        os.remove(imagePath + "img%d.png" % (i))     
+                        
+
+    pdfout = PdfFileWriter()
+    
+    for i in pagesToKeep:
+        x = reader.getPage(i)
+        pdfout.addPage(i)
+
+    with open ('fixed_PDF', 'wb') as f:
+        reader.write(f)
+    
+
+
+    
+process('test.pdf', 'uploads\\', 'images\\', 0.1)
+    
+    
+
+    
+
+
 
 
 
