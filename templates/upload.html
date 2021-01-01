@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' href= "{{ url_for('static',filename='styles/style.css') }}"/>
     <meta charset="utf-8">
     <title>Pdf_Remover</title>
   </head>
   <body>
-    <h1> File Uploaded </h1>
-    <label>Processing...</label>
+    <div class="body-container">
+      <h1 class="display-4"> File Uploaded </h1>
+      <br>
+      <label>Processing...</label>
+      <a href="/return-files/{{value}}" target="blank">
+        <button class='btn btn-default'>Download</button>
+      </a>
+    </div>
   </body>
 </html>
