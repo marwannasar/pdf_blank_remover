@@ -29,9 +29,10 @@ def home():
 def post_upload():
     return render_template("/upload.html")
 
-@app.route("/downloadfile/<filename>", methods=["GET"])
-def download_file(filename):
-    process(filename, uploads_path+"\\", downloads_path, images_path, 0.1)
+@app.route("/downloadfile/<filename>/<threshold>", methods=["GET"])
+def download_file(filename, threshold):
+    if (process(filename, uploads_path+"\\", downloads_path, images_path, float(threshold)/100) == -1):
+        return render_template('falseoutput.html')
     return render_template('upload.html',value="fixed_"+filename)
 
 @app.route('/return-files/<filename>')
@@ -42,11 +43,12 @@ def return_files_tut(filename):
 @app.route("/api/v1.0/tasks/render/", methods=["POST"])
 def upload():
     file = request.files["file"]
+    threshold = request.form["threshold"]
     if (correct_name(file.filename)):
         #file.save(os.path.join(app.config["uploads_path"], file.filename[:-4] + "-input.pdf"))
         currentDate = str(datetime.datetime.now()).replace(":","-").replace(" ", "")
         file.save(os.path.join(THIS_FOLDER, uploads_path, file.filename[:-4] + "-" + currentDate+ "-input.pdf"))
-        return redirect("/downloadfile/" + file.filename[:-4] + "-" + currentDate + "-input.pdf")
+        return redirect("/downloadfile/" + file.filename[:-4] + "-" + currentDate + "-input.pdf/" + threshold )
     
 
 if __name__ == "__main__":

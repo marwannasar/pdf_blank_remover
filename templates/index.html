@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="title-container">
-      <h1 class="display-3"> Remove white pages in your PDF. </h1>
+      <h1 class="display-3"> Remove blank pages in your PDF </h1>
     </div>
     <div class="body-container">
         <label class="display-4" id="submit">Submit PDF</label>
@@ -18,8 +18,8 @@
             <input type="submit" value="Submit" id="Submit" />
             <div class="options-container">
               <label for="customRange1">Blank Page Threshold</label>
-              <input value="90" type="range" min="0" max="100" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value;">
-              <em id="rangeValLabel"></em>
+              <input value="0" name="threshold" type="range" min="0" max="100" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value + '%';">
+              <em id="rangeValLabel">0%</em>
             </div>
           </form>
       </div>
