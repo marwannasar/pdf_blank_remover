@@ -1,4 +1,4 @@
-from PyPDF2 import PdfFileReader, PdfFileWriter 
+import PyPDF2
 import fitz
 from PIL import Image
 import os
@@ -61,11 +61,11 @@ def process(fileName, uploadPath, imagePath, threshold):
         os.remove(imagePath + "img%d.png" % (i))     
                         
 
-    pdfout = PdfFileWriter()
+    writer1 = PyPDF2.PdfFileWriter()
     
     for i in pagesToKeep:
         x = reader.getPage(i)
-        pdfout.addPage(i)
+        writer1.addPage(i)
 
     with open ('fixed_PDF', 'wb') as f:
         reader.write(f)
