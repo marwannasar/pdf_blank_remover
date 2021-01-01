@@ -61,20 +61,23 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
         os.remove(imagePath + "img%d.png" % (i))     
                         
 
-    writer1 = PyPDF2.PdfFileWriter()
-    
-    for i in pagesToKeep:
-        x = reader.getPage(i)
-        writer1.addPage(x)
+    if len(pagesToKeep) == 0:
+        print("nah")
+        return -1
+    else:
+        writer1 = PyPDF2.PdfFileWriter()
+        
+        for i in pagesToKeep:
+            x = reader.getPage(i)
+            writer1.addPage(x)
 
-    with open (downloadPath + 'fixed_' + fileName, 'wb') as f:
-        writer1.write(f)
+        with open (downloadPath + 'fixed_' + fileName, 'wb') as f:
+            writer1.write(f)
     
 
 
     
-#process('test.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
-process('Document2-2020-12-3122-29-06.314310-input.pdf', "uploads\\", "downloads\\", "images\\", 0.1)
+#process('Document2-2020-12-3122-29-06-314310-input.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
     
     
 
