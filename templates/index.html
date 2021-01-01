@@ -17,7 +17,14 @@
             <input id="fileupload" name="file" type="file" />
             <input type="submit" value="Submit" id="Submit" />
           </form>
-    </div>
+      </div>
+      <div class="options-container">
+        <form method="POST">
+          <label for="customRange1">Blank Page Threshold</label>
+          <input value="90" type="range" min="0" max="100" class="custom-range" id="customRange1" oninput="document.getElementById('rangeValLabel').innerHTML = this.value;">
+          <em id="rangeValLabel"></em>
+        </form>
+      </div>
     </div>
   </body>
 </html>

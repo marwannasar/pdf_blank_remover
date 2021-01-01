@@ -18,7 +18,7 @@ def correct_name(name):
 def temp_func():
     time.sleep(5)
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
     return render_template("/index.html")
 
