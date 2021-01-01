@@ -4,7 +4,7 @@ from PIL import Image
 import os
 
 
-def process(fileName, uploadPath, imagePath, threshold):
+def process(fileName, uploadPath, downloadPath, imagePath, threshold):
 
     dirname = os.path.dirname(__file__)
  
@@ -65,15 +65,15 @@ def process(fileName, uploadPath, imagePath, threshold):
     
     for i in pagesToKeep:
         x = reader.getPage(i)
-        writer1.addPage(i)
+        writer1.addPage(x)
 
-    with open ('fixed_PDF', 'wb') as f:
-        reader.write(f)
+    with open (downloadPath + 'fixed_' + fileName, 'wb') as f:
+        writer1.write(f)
     
 
 
     
-process('test.pdf', 'uploads\\', 'images\\', 0.1)
+#process('test.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
     
     
 
