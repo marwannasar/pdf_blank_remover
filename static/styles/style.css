@@ -4,6 +4,13 @@
 }
 .body-container, .submit-container{
     padding-top: 100px;
+    margin-bottom: 10%;
+}
+
+.options-container{
+    text-align: center;
+    width:40%;
+    margin: 0 auto;
 }
 
 #submit{
