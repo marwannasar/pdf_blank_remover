@@ -37,7 +37,8 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
         width, height = size
         totalPixels = width * height
 
-        sr,sg,sb = img.getpixel((1,1))
+        #sr,sg,sb = img.getpixel((1,1))
+        
 
 
         maxPixels = threshold * totalPixels
@@ -47,7 +48,7 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
         for x in range (width):
             for y in range (height):
                 r,g,b = img.getpixel((x,y))
-                if (r!=sr or g!=sg or b!=sb):
+                if (not((abs(r-b) <= 5) and (abs(r-g) <= 5) and (abs(b-g) <=5) and (min(r,g,b) > 235))):
                     pixelCounter +=1
                     if pixelCounter > maxPixels:
                         deletePage = False
@@ -77,7 +78,7 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
 
 
     
-#process('Document2-2020-12-3122-29-06-314310-input.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
+#process('test2.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
     
     
 
