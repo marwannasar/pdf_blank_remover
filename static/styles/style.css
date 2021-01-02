@@ -17,7 +17,7 @@ button{
     margin: 0 auto;
 }
 
-.options-container{
+.options-container, .stats-container{
     text-align: center;
     padding-top: 20%;
     margin-top: 20%;

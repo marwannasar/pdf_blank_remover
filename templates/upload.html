@@ -17,6 +17,12 @@
         <button class='btn btn-dark'>Go Back</button>
       </a>
     </div>
-    
+    <div class="stats-container">
+      <ul style="list-style-type:none;">
+        <li>Number of removed pages : {{ removedPages }}</li>
+        <li>Time to process : {{ Time }} seconds</li>
+        <li>Old / New File Size : {{ oldSize }} MB / {{ newSize }} MB</li>
+      </ul>
+    </div>
   </body>
 </html>
