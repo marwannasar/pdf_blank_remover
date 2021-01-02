@@ -31,9 +31,15 @@ def post_upload():
 
 @app.route("/downloadfile/<filename>/<threshold>/<performance>", methods=["GET"])
 def download_file(filename, threshold, performance):
-    if (process(filename, uploads_path+"\\", downloads_path, images_path, float(threshold)/100 , int(performance)) == -1):
+    statistics = process(filename, uploads_path+"\\", downloads_path, images_path, float(threshold)/100 , int(performance))    
+    if (statistics == -1):
         return render_template('falseoutput.html')
-    return render_template('upload.html',value="fixed_"+filename)
+    return render_template('upload.html',
+                           value="fixed_"+filename,
+                           removedPages = statistics["removed"],
+                           Time = statistics["ttime"],
+                           oldSize =statistics["oldfsize"],
+                           newSize = statistics["newfsize"])
 
 @app.route('/return-files/<filename>')
 def return_files_tut(filename):
