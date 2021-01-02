@@ -2,11 +2,22 @@ import PyPDF2
 import fitz
 from PIL import Image
 import os
+import time
 
 performanceData = {0:1, 1:5}
 
 def process(fileName, uploadPath, downloadPath, imagePath, threshold, performance):
 
+    startTime = time.time()
+    
+    stats = {
+        "removed": 0,
+        "ttime": 0,
+        "oldfsize": 0,
+        "newfsize": 0
+        }
+        
+    
     dirname = os.path.dirname(__file__)
  
     file = open(os.path.join(dirname, uploadPath + fileName), 'rb')
@@ -20,7 +31,8 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold, performanc
     doc = fitz.open(uploadPath + fileName)
 
     pagesToKeep = list(range(n))
-     
+
+    
     for i in range (n):
         deletePage = True
        
@@ -61,6 +73,7 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold, performanc
 
         if deletePage:
             pagesToKeep.remove(i)
+            stats["removed"]+=1
             #print("DELETED PAGE" , i)
 
 
@@ -78,11 +91,19 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold, performanc
 
         with open (downloadPath + 'fixed_' + fileName, 'wb') as f:
             writer1.write(f)
-    
 
-
+    endTime = time.time()
     
-#process('SPCOM.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.01, 1)
+    stats["ttime"] = round(endTime - startTime, 2)
+
+    stats["oldfsize"] = round((os.stat(uploadPath + fileName).st_size) / 1000000, 3)
+    stats["newfsize"] = round((os.stat(downloadPath + 'fixed_' + fileName).st_size) / 1000000, 3)
+
+    #print(stats)
+    return stats
+    
+    
+#process('SPCOM.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.2, 1)
     
     
 
