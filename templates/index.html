@@ -7,19 +7,40 @@
     <link rel='stylesheet' type='text/css' href= "{{ url_for('static',filename='styles/style.css') }}"/>
   </head>
   <body>
+    <script>
+      performanceData = {
+        0: "Precision",
+        1: "Balance",
+        2: "Speed"
+      };
+      window.onload = function(){ 
+        document.getElementById("performance").oninput = function(){
+          document.getElementById('perfValLabel').innerHTML = performanceData[this.value];
+        }
+      };
+      
+    </script>
     <div class="title-container">
       <h1 class="display-3"> Remove blank pages in your PDF </h1>
     </div>
     <div class="body-container">
         <label class="display-4" id="submit">Submit PDF</label>
         <div class="submit-container">
-          <form id="uploadbanner" enctype="multipart/form-data" method="POST" action="/api/v1.0/tasks/render/">
-            <input id="fileupload" name="file" type="file" />
-            <input type="submit" value="Submit" id="Submit" />
+          <form class="form-group" id="uploadbanner" enctype="multipart/form-data" method="POST" action="/api/v1.0/tasks/render/">
+            <input  class="display-4" id="fileupload" name="file" type="file" />
+            <input class="display-4" type="submit" value="Submit" id="Submit" />
             <div class="options-container">
-              <label for="customRange1">Blank Page Threshold</label>
-              <input value="0" name="threshold" type="range" min="0" max="100" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value + '%';">
-              <em id="rangeValLabel">0%</em>
+              <div class="threshold-container">
+                <label style="font-size:18px" class="display-4" for="customRange1">Blank Page Threshold</label>
+                <input value="0" name="threshold" type="range" min="0" max="100" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value + '%';">
+                <em id="rangeValLabel">0%</em>
+              </div>
+              <br><br><br>
+                <div class="performance-container">
+                <label style="font-size:18px" class="display-4" for="customRange1">Performance Options</label>
+                <input value="2" name="performance" type="range" min="0" max="2" class="custom-range" id="performance">
+                <em id="perfValLabel">Precision</em>
+              </div>
             </div>
           </form>
       </div>
