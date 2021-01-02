@@ -30,8 +30,8 @@ def post_upload():
     return render_template("/upload.html")
 
 @app.route("/downloadfile/<filename>/<threshold>/<performance>", methods=["GET"])
-def download_file(filename, threshold):
-    if (process(filename, uploads_path+"\\", downloads_path, images_path, float(threshold)/100) == -1, performance):
+def download_file(filename, threshold, performance):
+    if (process(filename, uploads_path+"\\", downloads_path, images_path, float(threshold)/100 , int(performance)) == -1):
         return render_template('falseoutput.html')
     return render_template('upload.html',value="fixed_"+filename)
 

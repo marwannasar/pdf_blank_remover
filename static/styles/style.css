@@ -13,7 +13,7 @@ button{
 .body-container, .submit-container{
     padding-top: 100px;
     margin-bottom: 10%;
-    width:50%;
+    width:70%;
     margin: 0 auto;
 }
 
@@ -28,3 +28,7 @@ button{
     font-size: 30px;
 }
 
+.performance-container{
+    width: 30% !important;
+    margin: 0 auto;
+}

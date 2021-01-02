@@ -31,13 +31,15 @@
             <div class="options-container">
               <div class="threshold-container">
                 <label style="font-size:18px" class="display-4" for="customRange1">Blank Page Threshold</label>
-                <input value="0" name="threshold" type="range" min="0" max="100" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value + '%';">
+                <button style = "padding: 0 4px;" type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="0% threshold is most suitable for completely blank pages, if there is small amounts of text/markings, adjust upwards accordingly. If you go too high, you may end up with unwanted deleteted pages.">?</button>
+                <input value="0" name="threshold" step="0.1" type="range" min="0" max="5" class="custom-range" id="threshold" oninput="document.getElementById('rangeValLabel').innerHTML = this.value + '%';">
                 <em id="rangeValLabel">0%</em>
               </div>
               <br><br><br>
                 <div class="performance-container">
                 <label style="font-size:18px" class="display-4" for="customRange1">Performance Options</label>
-                <input value="2" name="performance" type="range" min="0" max="1" class="custom-range" id="performance">
+                <button style = "padding: 0 4px;" type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Use precision for low page count pdfs, use speed for high page count pdfs">?</button>
+                <input value="0" name="performance" type="range" min="0" max="1" class="custom-range" id="performance">
                 <em id="perfValLabel">Precision</em>
               </div>
             </div>

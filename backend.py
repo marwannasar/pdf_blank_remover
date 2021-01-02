@@ -3,8 +3,9 @@ import fitz
 from PIL import Image
 import os
 
+performanceData = {0:1, 1:5}
 
-def process(fileName, uploadPath, downloadPath, imagePath, threshold):
+def process(fileName, uploadPath, downloadPath, imagePath, threshold, performance):
 
     dirname = os.path.dirname(__file__)
  
@@ -14,6 +15,7 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
 
     n = reader.numPages
 
+    step = performanceData[performance]
 
     doc = fitz.open(uploadPath + fileName)
 
@@ -41,29 +43,31 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
         
 
 
-        maxPixels = threshold * totalPixels
+        maxPixels = (threshold * totalPixels) / step
 
         pixelCounter = 0
+
+    
         
-        for x in range (width):
-            for y in range (height):
+        for x in range (0,width,step):
+            for y in range (0,height,step):
+    
                 r,g,b = img.getpixel((x,y))
                 if (not((abs(r-b) <= 5) and (abs(r-g) <= 5) and (abs(b-g) <=5) and (min(r,g,b) > 235))):
                     pixelCounter +=1
                     if pixelCounter > maxPixels:
                         deletePage = False
-                    
-               
+                          
 
         if deletePage:
             pagesToKeep.remove(i)
+            #print("DELETED PAGE" , i)
 
 
         os.remove(imagePath + "img%d.png" % (i))     
                         
 
     if len(pagesToKeep) == 0:
-        print("nah")
         return -1
     else:
         writer1 = PyPDF2.PdfFileWriter()
@@ -78,7 +82,7 @@ def process(fileName, uploadPath, downloadPath, imagePath, threshold):
 
 
     
-#process('test2.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.1)
+#process('SPCOM.pdf', 'uploads\\', 'downloads\\', 'images\\', 0.01, 1)
     
     
 
