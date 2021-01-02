@@ -10,8 +10,7 @@
     <script>
       performanceData = {
         0: "Precision",
-        1: "Balance",
-        2: "Speed"
+        1: "Speed"
       };
       window.onload = function(){ 
         document.getElementById("performance").oninput = function(){
@@ -38,7 +37,7 @@
               <br><br><br>
                 <div class="performance-container">
                 <label style="font-size:18px" class="display-4" for="customRange1">Performance Options</label>
-                <input value="2" name="performance" type="range" min="0" max="2" class="custom-range" id="performance">
+                <input value="2" name="performance" type="range" min="0" max="1" class="custom-range" id="performance">
                 <em id="perfValLabel">Precision</em>
               </div>
             </div>
