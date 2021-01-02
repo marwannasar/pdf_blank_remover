@@ -1,7 +1,5 @@
 # pdf_blank_remover
 
-# pdf_blank_remover
-
 # Clone the code repository into ~/dev/my_app
 
     mkdir -p ~/dev
